@@ -6,7 +6,7 @@
 /*   By: no-conne <no-conne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/04 09:07:25 by no-conne          #+#    #+#             */
-/*   Updated: 2019/07/04 14:45:52 by no-conne         ###   ########.fr       */
+/*   Updated: 2019/07/05 08:39:01 by no-conne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,18 @@ int	main(void)
 			mlx_pixel_put(mlx_ptr, win_ptr, x, y, 0xFFFFFF);
 			x++;
 		}
-	y++;
+	y += 10;
+	}
+	x = 50;
+	while(x <= 450)
+	{
+		y = 50;
+		while (y <= 450)
+		{
+			mlx_pixel_put(mlx_ptr, win_ptr, x, y, 0xFFFFFF);
+			y++;
+		}
+	x += 10;
 	}
 	mlx_key_hook(win_ptr, my_key_funct, &acc);
 	mlx_loop(mlx_ptr);
