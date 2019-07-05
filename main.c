@@ -6,7 +6,7 @@
 /*   By: no-conne <no-conne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/04 09:07:25 by no-conne          #+#    #+#             */
-/*   Updated: 2019/07/05 08:39:01 by no-conne         ###   ########.fr       */
+/*   Updated: 2019/07/05 10:17:20 by no-conne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,41 @@
 //#include "/goinfre/no-conne/Desktop/fdfh/libft/includes/libft.h"
 #include "main.h"
 
-int	my_key_funct(int keycode, void *param)
+t_point		get_point(char *str) //turns numbers into points that can be worked with
+{
+	t_point point;
+	point.x = str[0];
+	point.y = str[1];
+	point.z = str[2];
+	return (point);
+}
+
+char **interpreter(const char* path) //turns input file into a str of numbers
+{
+	int fd;
+	char *line;
+	char **inf;
+	int x;
+	int y;
+	char data[50][50];
+
+	x = 0;
+	y = 0;
+	fd = open(path, O_RDONLY);
+	while (get_next_line(fd, &line) > 0);
+	{
+		inf = ft_strsplit(line, ' ');
+		while (inf[x][y])
+		{
+			data[x][y] = ft_atoi(inf[x][y]);
+			x++;
+		}
+		y++;
+	}
+	return (data);
+}
+
+int	my_key_funct(int keycode, void *param) // for escaping to end function
 {
 	ft_putstr("Key event: ");
 	ft_putnbr(keycode);
