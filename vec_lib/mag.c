@@ -6,11 +6,11 @@
 /*   By: no-conne <no-conne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 11:34:49 by no-conne          #+#    #+#             */
-/*   Updated: 2019/07/10 12:01:06 by no-conne         ###   ########.fr       */
+/*   Updated: 2019/07/10 12:20:27 by no-conne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vec.h"
+#include "./includes/vec.h"
 
 float		mag(t_point *o, t_point *n)
 {

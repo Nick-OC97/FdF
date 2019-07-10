@@ -6,16 +6,16 @@
 /*   By: no-conne <no-conne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 11:56:21 by no-conne          #+#    #+#             */
-/*   Updated: 2019/07/10 12:00:52 by no-conne         ###   ########.fr       */
+/*   Updated: 2019/07/10 12:21:07 by no-conne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vec.h"
+#include "./includes/vec.h"
 
 float		vec_ang(t_point *o, t_point *a, t_point *b)
 {
 	float i;
 
-	i = dot_prod(a,b) / (mag(a) * mag(b));
+	i = dot_prod(a,b) / (mag(o, a) * mag(o, b));
 	return (i);
 }

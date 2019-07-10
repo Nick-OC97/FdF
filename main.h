@@ -6,7 +6,7 @@
 /*   By: no-conne <no-conne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/04 14:07:49 by no-conne          #+#    #+#             */
-/*   Updated: 2019/07/10 07:59:23 by no-conne         ###   ########.fr       */
+/*   Updated: 2019/07/10 12:31:18 by no-conne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "libft/includes/libft.h"
 # include "resources/minilibx_macos/mlx.h"
+# include "vec_lib/includes/vec.h"
 # include <math.h>
 
 typedef struct s_mlx_acc
@@ -22,13 +23,6 @@ typedef struct s_mlx_acc
 	void 	*mlx_ptr;
 	void	*win_ptr;
 }			t_mlx_acc;
-
-typedef struct s_point
-{
-	int		x;
-	int		y;
-	int		z;
-}			t_point;
 
 typedef struct s_grid_sizes
 {

@@ -6,11 +6,11 @@
 /*   By: no-conne <no-conne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 11:25:27 by no-conne          #+#    #+#             */
-/*   Updated: 2019/07/10 12:00:51 by no-conne         ###   ########.fr       */
+/*   Updated: 2019/07/10 12:20:26 by no-conne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vec.h"
+#include "./includes/vec.h"
 
 float		dot_prod(t_point *a, t_point *b)
 {
