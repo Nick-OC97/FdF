@@ -6,7 +6,7 @@
 /*   By: no-conne <no-conne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/04 14:07:49 by no-conne          #+#    #+#             */
-/*   Updated: 2019/07/09 11:26:44 by no-conne         ###   ########.fr       */
+/*   Updated: 2019/07/10 07:59:23 by no-conne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,7 @@
 
 # include "libft/includes/libft.h"
 # include "resources/minilibx_macos/mlx.h"
-
-/* typedef struct s_point_list
-{
-	t_point		point;
-	struct s_point_list *next;
-}				t_point_list;*/
+# include <math.h>
 
 typedef struct s_mlx_acc
 {

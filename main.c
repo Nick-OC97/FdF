@@ -6,7 +6,7 @@
 /*   By: no-conne <no-conne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/04 09:07:25 by no-conne          #+#    #+#             */
-/*   Updated: 2019/07/09 13:37:46 by no-conne         ###   ########.fr       */
+/*   Updated: 2019/07/10 10:27:57 by no-conne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,37 @@ int	my_key_funct(int keycode, void *param) //stopping loop with esc function
 	return (1);
 }
 
+void	draw_line(int x1, int y1, int x2, int y2, t_mlx_acc acc)
+{
+	int dx;
+	int dy;
+	int step;
+	int i;
+
+	x1 = x1 * 20;
+	y1 = y1 * 20;
+	x2 = x2 * 20;
+	y2 = y2 * 20;
+	dx = (x2 - x1);
+	dy = (y2 - y1);
+	if (abs(dx) >= abs(dy))
+		step = abs(dx);
+	else
+		step = abs(dy);
+	dx = dx / step;
+	dy = dy / step;
+	i = 1;
+	while (i < step)
+	{
+		mlx_pixel_put(acc.mlx_ptr, acc.win_ptr, x1, y1, 0xFFFFFF);
+		x1 = x1 + dx;
+		y1 = y1 + dy;
+		i++;
+	}
+	mlx_pixel_put(acc.mlx_ptr, acc.win_ptr, x1, y1, 0xFFFFFF);
+	
+}
+
 int	main(void)
 {
 	void	*mlx_ptr;
@@ -99,6 +130,8 @@ int	main(void)
 	int y;
 	t_mlx_acc	acc;
 	t_point		*lst;
+	t_point		*lst2;
+	t_point		*lst_start;
 	t_grid_sizes	*grid;
 
 	mlx_ptr = mlx_init();
@@ -107,6 +140,50 @@ int	main(void)
 	acc.win_ptr = win_ptr;
 	grid = get_sizes();
 	lst = interpreter("./test_maps/42.fdf", grid);
+	 x = 0;
+	 lst2 = lst;
+	 lst_start = lst;
+	 lst2++;
+	/* while (x < grid->num_tot)									testing the grid points
+	{
+		ft_putnbr(lst->x);
+		ft_putnbr(lst->y);
+		ft_putchar('\n');
+		mlx_pixel_put(acc.mlx_ptr, acc.win_ptr, (lst->x) * 20, (lst->y) * 20, 0xFFFFFF);
+		lst++;
+		x++;
+	}*/
+	int count = 0;
+	while (x < (grid->num_tot))										//testing drawing a flat grid x lines
+	{
+		if (lst->x == 18 && lst->y == 10)
+			break;
+		ft_putnbr(lst->x);
+		ft_putnbr(lst->y);
+		ft_putchar('\n');
+		draw_line(lst->x, lst->y, lst2->x, lst2->y, acc);
+		x++;
+		lst++;
+		lst2++;
+		count++;
+	}
+	lst = lst_start;
+	lst2 = lst + 19;
+	x = 0;
+	while (x < (grid->num_tot))										//testing drawing a flat grid y lines
+	{
+		if (lst->x == 0 && lst->y == 10)
+			break;
+		ft_putnbr(lst->x);
+		ft_putnbr(lst->y);
+		ft_putchar('\n');
+		draw_line(lst->x, lst->y, lst2->x, lst2->y, acc);
+		x++;
+		lst++;
+		lst2++;
+		count++;
+	}
+	ft_putnbr(count);
 	mlx_key_hook(win_ptr, my_key_funct, &acc);
 	mlx_loop(mlx_ptr);
 	return (0);
