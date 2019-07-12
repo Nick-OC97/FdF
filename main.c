@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: no-conne <no-conne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nicholasoconnell <nicholasoconnell@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/04 09:07:25 by no-conne          #+#    #+#             */
-/*   Updated: 2019/07/10 10:27:57 by no-conne         ###   ########.fr       */
+/*   Updated: 2019/07/12 11:54:56 by nicholasoco      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,10 +153,12 @@ int	main(void)
 		lst++;
 		x++;
 	}*/
+	ft_putnbr(grid->num_x);
+	ft_putnbr(grid->num_y);
 	int count = 0;
 	while (x < (grid->num_tot))										//testing drawing a flat grid x lines
 	{
-		if (lst->x == 18 && lst->y == 10)
+		if (lst->x == grid->num_x - 1 && lst->y == grid->num_y - 1)
 			break;
 		ft_putnbr(lst->x);
 		ft_putnbr(lst->y);
@@ -168,11 +170,11 @@ int	main(void)
 		count++;
 	}
 	lst = lst_start;
-	lst2 = lst + 19;
+	lst2 = lst + grid->num_x;
 	x = 0;
 	while (x < (grid->num_tot))										//testing drawing a flat grid y lines
 	{
-		if (lst->x == 0 && lst->y == 10)
+		if (lst->x == 0 && lst->y == grid->num_y - 1)
 			break;
 		ft_putnbr(lst->x);
 		ft_putnbr(lst->y);
