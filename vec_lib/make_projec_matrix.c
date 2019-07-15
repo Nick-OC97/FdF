@@ -3,23 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   make_projec_matrix.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nicholasoconnell <nicholasoconnell@stud    +#+  +:+       +#+        */
+/*   By: no-conne <no-conne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 12:04:50 by nicholasoco       #+#    #+#             */
-/*   Updated: 2019/07/12 12:16:17 by nicholasoco      ###   ########.fr       */
+/*   Updated: 2019/07/15 10:16:52 by no-conne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/vec.h"
+#include <stdio.h>
 
-t_matrix	*make_proj_matrix(float fNear, float fFar, float fFov, float fAR)
+t_matrix	*make_projec_matrix(double fNear, double fFar, double fFov, double fAR)
 {
 	t_matrix	*proj;
-	float		fFovRad;
+	double		fFovRad;
+	int x;
+	int y;
 
+	y = 0;
 	proj = (t_matrix *)malloc(sizeof(t_matrix));
-	proj = 0;
-	fFovRad = 1 / tanf(fFov * 0.5 / 180 * M_PI);
+	while(y <=3)
+	{
+		x = 0;
+		while (x <= 3)
+		{
+			proj->m[y][x] = 0;
+			x++;
+		}
+		y++;
+	}
+	fFovRad = 1 / tan(fFov * 0.5 / 180 * M_PI);
+	printf("this is fFovRad: %f\n", fFovRad);
 	proj->m[0][0] = fAR * fFovRad;
 	proj->m[1][1] = fFovRad;
 	proj->m[2][2] = fFar / fFar - fNear;

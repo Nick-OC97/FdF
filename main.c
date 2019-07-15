@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nicholasoconnell <nicholasoconnell@stud    +#+  +:+       +#+        */
+/*   By: no-conne <no-conne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/04 09:07:25 by no-conne          #+#    #+#             */
-/*   Updated: 2019/07/12 11:54:56 by nicholasoco      ###   ########.fr       */
+/*   Updated: 2019/07/15 10:41:27 by no-conne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,7 @@ int	main(void)
 	t_point		*lst2;
 	t_point		*lst_start;
 	t_grid_sizes	*grid;
+	t_matrix		*project;
 
 	mlx_ptr = mlx_init();
 	win_ptr = mlx_new_window(mlx_ptr, 500, 500, "NICK");
@@ -140,10 +141,26 @@ int	main(void)
 	acc.win_ptr = win_ptr;
 	grid = get_sizes();
 	lst = interpreter("./test_maps/42.fdf", grid);
-	 x = 0;
-	 lst2 = lst;
-	 lst_start = lst;
-	 lst2++;
+	project = make_projec_matrix(0.1, 1000, 100, (500/500));			//testing projection matrix
+	x = 0;
+	y = 0;
+	while (y <= 3)
+	{
+		x = 0;
+		while (x <= 3)
+		{
+			ft_putnbr(project->m[x][y]);
+			ft_putchar('\n');
+			x++;
+		}
+		y++;
+	}
+	ft_putchar('\n');
+	matrix_vecmultiply(lst, project);
+	x = 0;
+	lst2 = lst;
+	lst_start = lst;
+	lst2++;
 	/* while (x < grid->num_tot)									testing the grid points
 	{
 		ft_putnbr(lst->x);
@@ -160,9 +177,9 @@ int	main(void)
 	{
 		if (lst->x == grid->num_x - 1 && lst->y == grid->num_y - 1)
 			break;
-		ft_putnbr(lst->x);
-		ft_putnbr(lst->y);
-		ft_putchar('\n');
+		//ft_putnbr(lst->x);
+		//ft_putnbr(lst->y);
+		//ft_putchar('\n');
 		draw_line(lst->x, lst->y, lst2->x, lst2->y, acc);
 		x++;
 		lst++;
@@ -176,9 +193,9 @@ int	main(void)
 	{
 		if (lst->x == 0 && lst->y == grid->num_y - 1)
 			break;
-		ft_putnbr(lst->x);
-		ft_putnbr(lst->y);
-		ft_putchar('\n');
+		//ft_putnbr(lst->x);
+		//ft_putnbr(lst->y);
+		//ft_putchar('\n');
 		draw_line(lst->x, lst->y, lst2->x, lst2->y, acc);
 		x++;
 		lst++;
