@@ -6,7 +6,7 @@
 /*   By: no-conne <no-conne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 11:29:29 by no-conne          #+#    #+#             */
-/*   Updated: 2019/07/16 11:04:55 by no-conne         ###   ########.fr       */
+/*   Updated: 2019/07/16 12:26:16 by no-conne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_point
 	float		x;
 	float		y;
 	float		z;
+	float		w;
 }			t_point;
 
 typedef struct s_matrix
@@ -43,5 +44,6 @@ t_point		*vec_add(t_point *a, t_point *b);
 t_point		*vec_subtract(t_point *a, t_point *b);
 t_point		*scalar_vec_multiply(t_point *a, float n);
 t_point		*scalar_vec_multiply(t_point *a, float n);
+t_point		*cross_prod(t_point *a, t_point *b);
 
 #endif
