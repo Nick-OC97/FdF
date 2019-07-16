@@ -6,7 +6,7 @@
 /*   By: no-conne <no-conne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/04 09:07:25 by no-conne          #+#    #+#             */
-/*   Updated: 2019/07/16 11:21:00 by no-conne         ###   ########.fr       */
+/*   Updated: 2019/07/16 11:29:45 by no-conne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,18 +123,18 @@ void	draw_line(float x1, float y1, float x2, float y2, t_mlx_acc acc)
 	
 }
 
-int		pepe(int button, int x, int y, t_mlx_acc acc)
+/*int		pepe(int button, int x, int y, t_mlx_acc acc)
 {
 	(void)button;
 	t_point		*a;
 	t_point		*b;
-	a->x = 250;
-	a->y = 250;
+	a->x = 970;
+	a->y = 530;
 	b->x = x;
 	b->y = y;
 	draw_line(a->x, a->y, b->x, b->y, acc);
 	return (0);
-}
+}*/
 
 int	main(void)
 {
@@ -155,7 +155,6 @@ int	main(void)
 	acc.win_ptr = win_ptr;
 	grid = get_sizes();
 	lst = interpreter("./test_maps/42.fdf", grid);
-	project = make_projec_matrix(0.1, 250, 90, (1920/1080));			//testing projection matrix
 	x = 0;
 	lst2 = lst;
 	lst_start = lst;
@@ -187,7 +186,7 @@ int	main(void)
 		lst2++;
 	}
 	mlx_key_hook(win_ptr, my_key_funct, &acc);
-	mlx_mouse_hook(win_ptr, pepe, &acc);
+	//mlx_mouse_hook(win_ptr, pepe, &acc);
 	mlx_loop(mlx_ptr);
 	return (0);
 }
