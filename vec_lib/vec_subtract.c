@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mag.c                                              :+:      :+:    :+:   */
+/*   vec_subtract.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: no-conne <no-conne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/10 11:34:49 by no-conne          #+#    #+#             */
-/*   Updated: 2019/07/10 12:20:27 by no-conne         ###   ########.fr       */
+/*   Created: 2019/07/16 10:56:33 by no-conne          #+#    #+#             */
+/*   Updated: 2019/07/16 10:57:28 by no-conne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/vec.h"
 
-float		mag(t_point *o, t_point *n)
+t_point		*vec_subtract(t_point *a, t_point *b)
 {
-	float i;
+	t_point		*o;
 
-	i = sqrt(pow((n->x - o->x), 2) + pow((n->y - o->y), 2) + pow((n->z - o->z), 2));
-	return (i);
+	o = (t_point *)malloc(sizeof(t_point));
+	o->x = b->x - a->x;
+	o->y = b->y - a->y;
+	o->z = b->z - a->z;
+	return (o);
 }

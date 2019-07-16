@@ -1,31 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   make_projec_matrix.c                               :+:      :+:    :+:   */
+/*   magnitude.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: no-conne <no-conne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/12 12:04:50 by nicholasoco       #+#    #+#             */
-/*   Updated: 2019/07/16 10:38:20 by no-conne         ###   ########.fr       */
+/*   Created: 2019/07/10 11:34:49 by no-conne          #+#    #+#             */
+/*   Updated: 2019/07/16 11:10:58 by no-conne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/vec.h"
-#include <stdio.h>
 
-t_matrix	*make_projec_matrix(float fNear, float fFar, float fFov, float fAR)
+float		magnitude(t_point *n, t_point *o)
 {
-	t_matrix	*proj;
-	float		fFovRad;
+	float i;
 
-	proj = NULL;
-	proj = init_to_0(proj, 4, 4);
-	fFovRad = 1 / tan((fFov * 0.5) / 180 * M_PI);
-	proj->m[0][0] = fAR * fFovRad;
-	proj->m[1][1] = fFovRad;
-	proj->m[2][2] = fFar / fFar - fNear;
-	proj->m[3][2] = (-fFar * fNear) / (fFar - fNear);
-	proj->m[2][3] = 1;
-	proj->m[3][3] = 0;
-	return (proj);
+	i = sqrt(pow((o->x - n->x), 2) + pow((o->y - n->y), 2) + pow((o->z - n->z), 2));
+	return (i);
 }

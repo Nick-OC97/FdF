@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   make_projec_matrix.c                               :+:      :+:    :+:   */
+/*   scalar_vec_multiply.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: no-conne <no-conne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/12 12:04:50 by nicholasoco       #+#    #+#             */
-/*   Updated: 2019/07/16 10:38:20 by no-conne         ###   ########.fr       */
+/*   Created: 2019/07/16 10:59:31 by no-conne          #+#    #+#             */
+/*   Updated: 2019/07/16 11:01:54 by no-conne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/vec.h"
-#include <stdio.h>
 
-t_matrix	*make_projec_matrix(float fNear, float fFar, float fFov, float fAR)
+t_point		*scalar_vec_multiply(t_point *a, float n)
 {
-	t_matrix	*proj;
-	float		fFovRad;
+	t_point		*o;
 
-	proj = NULL;
-	proj = init_to_0(proj, 4, 4);
-	fFovRad = 1 / tan((fFov * 0.5) / 180 * M_PI);
-	proj->m[0][0] = fAR * fFovRad;
-	proj->m[1][1] = fFovRad;
-	proj->m[2][2] = fFar / fFar - fNear;
-	proj->m[3][2] = (-fFar * fNear) / (fFar - fNear);
-	proj->m[2][3] = 1;
-	proj->m[3][3] = 0;
-	return (proj);
+	o = (t_point *)malloc(sizeof(t_point));
+	o->x = a->x * n;
+	o->y = a->y * n;
+	o->z = a->z * n;
+	return (o);
 }

@@ -6,11 +6,12 @@
 /*   By: no-conne <no-conne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/04 09:07:25 by no-conne          #+#    #+#             */
-/*   Updated: 2019/07/15 10:41:27 by no-conne         ###   ########.fr       */
+/*   Updated: 2019/07/16 11:21:00 by no-conne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
+#include <stdio.h>
 
 t_grid_sizes		*ft_lstnew_fdf(int x_size, int y_size, int total_size)// puts column, row and total size in a struct
 {
@@ -91,12 +92,12 @@ int	my_key_funct(int keycode, void *param) //stopping loop with esc function
 	return (1);
 }
 
-void	draw_line(int x1, int y1, int x2, int y2, t_mlx_acc acc)
+void	draw_line(float x1, float y1, float x2, float y2, t_mlx_acc acc)
 {
-	int dx;
-	int dy;
-	int step;
-	int i;
+	float dx;
+	float dy;
+	float step;
+	float i;
 
 	x1 = x1 * 20;
 	y1 = y1 * 20;
@@ -104,10 +105,10 @@ void	draw_line(int x1, int y1, int x2, int y2, t_mlx_acc acc)
 	y2 = y2 * 20;
 	dx = (x2 - x1);
 	dy = (y2 - y1);
-	if (abs(dx) >= abs(dy))
-		step = abs(dx);
+	if (fabsf(dx) >= fabsf(dy))
+		step = fabsf(dx);
 	else
-		step = abs(dy);
+		step = fabsf(dy);
 	dx = dx / step;
 	dy = dy / step;
 	i = 1;
@@ -120,6 +121,19 @@ void	draw_line(int x1, int y1, int x2, int y2, t_mlx_acc acc)
 	}
 	mlx_pixel_put(acc.mlx_ptr, acc.win_ptr, x1, y1, 0xFFFFFF);
 	
+}
+
+int		pepe(int button, int x, int y, t_mlx_acc acc)
+{
+	(void)button;
+	t_point		*a;
+	t_point		*b;
+	a->x = 250;
+	a->y = 250;
+	b->x = x;
+	b->y = y;
+	draw_line(a->x, a->y, b->x, b->y, acc);
+	return (0);
 }
 
 int	main(void)
@@ -136,55 +150,29 @@ int	main(void)
 	t_matrix		*project;
 
 	mlx_ptr = mlx_init();
-	win_ptr = mlx_new_window(mlx_ptr, 500, 500, "NICK");
+	win_ptr = mlx_new_window(mlx_ptr, 1920, 1080, "NICK");
 	acc.mlx_ptr = mlx_ptr;
 	acc.win_ptr = win_ptr;
 	grid = get_sizes();
 	lst = interpreter("./test_maps/42.fdf", grid);
-	project = make_projec_matrix(0.1, 1000, 100, (500/500));			//testing projection matrix
-	x = 0;
-	y = 0;
-	while (y <= 3)
-	{
-		x = 0;
-		while (x <= 3)
-		{
-			ft_putnbr(project->m[x][y]);
-			ft_putchar('\n');
-			x++;
-		}
-		y++;
-	}
-	ft_putchar('\n');
-	matrix_vecmultiply(lst, project);
+	project = make_projec_matrix(0.1, 250, 90, (1920/1080));			//testing projection matrix
 	x = 0;
 	lst2 = lst;
 	lst_start = lst;
 	lst2++;
-	/* while (x < grid->num_tot)									testing the grid points
-	{
-		ft_putnbr(lst->x);
-		ft_putnbr(lst->y);
-		ft_putchar('\n');
-		mlx_pixel_put(acc.mlx_ptr, acc.win_ptr, (lst->x) * 20, (lst->y) * 20, 0xFFFFFF);
-		lst++;
-		x++;
-	}*/
-	ft_putnbr(grid->num_x);
-	ft_putnbr(grid->num_y);
-	int count = 0;
 	while (x < (grid->num_tot))										//testing drawing a flat grid x lines
 	{
 		if (lst->x == grid->num_x - 1 && lst->y == grid->num_y - 1)
 			break;
-		//ft_putnbr(lst->x);
-		//ft_putnbr(lst->y);
-		//ft_putchar('\n');
+		if (lst->x == grid->num_x - 1)
+		{
+			lst++;
+			lst2++;
+		}
 		draw_line(lst->x, lst->y, lst2->x, lst2->y, acc);
 		x++;
 		lst++;
 		lst2++;
-		count++;
 	}
 	lst = lst_start;
 	lst2 = lst + grid->num_x;
@@ -193,17 +181,13 @@ int	main(void)
 	{
 		if (lst->x == 0 && lst->y == grid->num_y - 1)
 			break;
-		//ft_putnbr(lst->x);
-		//ft_putnbr(lst->y);
-		//ft_putchar('\n');
 		draw_line(lst->x, lst->y, lst2->x, lst2->y, acc);
 		x++;
 		lst++;
 		lst2++;
-		count++;
 	}
-	ft_putnbr(count);
 	mlx_key_hook(win_ptr, my_key_funct, &acc);
+	mlx_mouse_hook(win_ptr, pepe, &acc);
 	mlx_loop(mlx_ptr);
 	return (0);
 }
