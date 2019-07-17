@@ -28,12 +28,12 @@ int mlx_shaders_pixel(glsl_info_t *glsl)
 
   glsl->pixel_vshader = glCreateShader(GL_VERTEX_SHADER);
   source = strdup("#version 110 \n"
-		  "attribute vec2 position;"
-		  "varying vec2 texcoord;"
+		  "attribute libvec2 position;"
+		  "varying libvec2 texcoord;"
 		  "void main()"
 		  "{"
-		  " gl_Position = vec4( position, 0.0, 1.0);"
-		  " texcoord = vec2(position[0]+1.0, 1.0 - position[1]) / 2.0;"
+		  " gl_Position = libvec4( position, 0.0, 1.0);"
+		  " texcoord = libvec2(position[0]+1.0, 1.0 - position[1]) / 2.0;"
 		  "}");
   length = strlen(source);
   glShaderSource(glsl->pixel_vshader, 1, (const GLchar**)&source, &length);
@@ -50,7 +50,7 @@ int mlx_shaders_pixel(glsl_info_t *glsl)
   glsl->pixel_fshader = glCreateShader(GL_FRAGMENT_SHADER);
   source = strdup("#version 110 \n"
 		  "uniform sampler2D texture;"
-		  "varying vec2 texcoord;"
+		  "varying libvec2 texcoord;"
 		  "void main()"
 		  "{"
 		  " gl_FragColor = texture2D(texture, texcoord);"
@@ -93,17 +93,17 @@ int mlx_shaders_image(glsl_info_t *glsl)
 
   glsl->image_vshader = glCreateShader(GL_VERTEX_SHADER);
   source = strdup("#version 110 \n"
-		  "attribute vec2 position;"
-		  "uniform vec2 winhalfsize;"
-		  "uniform vec2 imagepos;"
-		  "uniform vec2 imagesize;"
-		  "varying vec2 texcoord;"
+		  "attribute libvec2 position;"
+		  "uniform libvec2 winhalfsize;"
+		  "uniform libvec2 imagepos;"
+		  "uniform libvec2 imagesize;"
+		  "varying libvec2 texcoord;"
 		  "void main()"
 		  "{"
 		  " texcoord = position / imagesize;"
-		  " vec2 pos = position - winhalfsize + imagepos;"
+		  " libvec2 pos = position - winhalfsize + imagepos;"
 		  " pos = pos / winhalfsize;"
-		  " gl_Position = vec4( pos, 0.0, 1.0);"
+		  " gl_Position = libvec4( pos, 0.0, 1.0);"
 		  "}");
   length = strlen(source);
   glShaderSource(glsl->image_vshader, 1, (const GLchar**)&source, &length);
@@ -120,7 +120,7 @@ int mlx_shaders_image(glsl_info_t *glsl)
   glsl->image_fshader = glCreateShader(GL_FRAGMENT_SHADER);
   source = strdup("#version 110 \n"
 		  "uniform sampler2D texture;"
-		  "varying vec2 texcoord;"
+		  "varying libvec2 texcoord;"
 		  "void main()"
 		  "{"
 		  " gl_FragColor = texture2D(texture, texcoord);"
@@ -165,18 +165,18 @@ int mlx_shaders_font(glsl_info_t *glsl)
 
   glsl->font_vshader = glCreateShader(GL_VERTEX_SHADER);
   source = strdup("#version 110 \n"
-		  "attribute vec2 position;"
-		  "uniform vec2 winhalfsize;"
-		  "uniform vec2 fontposinwin;"
-		  "uniform vec2 fontposinatlas;"
-		  "uniform vec2 fontatlassize;"
-		  "varying vec2 texcoord;"
+		  "attribute libvec2 position;"
+		  "uniform libvec2 winhalfsize;"
+		  "uniform libvec2 fontposinwin;"
+		  "uniform libvec2 fontposinatlas;"
+		  "uniform libvec2 fontatlassize;"
+		  "varying libvec2 texcoord;"
 		  "void main()"
 		  "{"
-		  " texcoord = (position * vec2(1.0, -1.0) + fontposinatlas ) / fontatlassize;"
-		  " vec2 pos = position - winhalfsize + fontposinwin;"
+		  " texcoord = (position * libvec2(1.0, -1.0) + fontposinatlas ) / fontatlassize;"
+		  " libvec2 pos = position - winhalfsize + fontposinwin;"
 		  " pos = pos / winhalfsize;"
-		  " gl_Position = vec4( pos, 0.0, 1.0);"
+		  " gl_Position = libvec4( pos, 0.0, 1.0);"
 		  "}");
   length = strlen(source);
   glShaderSource(glsl->font_vshader, 1, (const GLchar**)&source, &length);
@@ -193,8 +193,8 @@ int mlx_shaders_font(glsl_info_t *glsl)
   glsl->font_fshader = glCreateShader(GL_FRAGMENT_SHADER);
   source = strdup("#version 110 \n"
 		  "uniform sampler2D texture;"
-		  "uniform vec4 color;"
-		  "varying vec2 texcoord;"
+		  "uniform libvec4 color;"
+		  "varying libvec2 texcoord;"
 		  "void main()"
 		  "{"
 		  " gl_FragColor = color * texture2D(texture, texcoord);"

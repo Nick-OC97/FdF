@@ -6,11 +6,11 @@
 /*   By: no-conne <no-conne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/04 09:07:25 by no-conne          #+#    #+#             */
-/*   Updated: 2019/07/16 11:29:45 by no-conne         ###   ########.fr       */
+/*   Updated: 2019/07/17 11:37:53 by no-conne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "main.h"
+#include "./includes/main.h"
 #include <stdio.h>
 
 t_grid_sizes		*ft_lstnew_fdf(int x_size, int y_size, int total_size)// puts column, row and total size in a struct
@@ -24,7 +24,7 @@ t_grid_sizes		*ft_lstnew_fdf(int x_size, int y_size, int total_size)// puts colu
 	return(grid);
 }
 
-t_grid_sizes		*get_sizes(void) //counts column, row and total size 
+t_grid_sizes		*get_sizes(char *path) //counts column, row and total size 
 {
 	int x_size;
 	int total_size;
@@ -35,7 +35,9 @@ t_grid_sizes		*get_sizes(void) //counts column, row and total size
 	t_grid_sizes *grid;
 
 	x_size = 0;
-	fd = open("./test_maps/42.fdf", O_RDONLY);
+	total_size = 0;
+	y_size = 0;
+	fd = open(path, O_RDONLY);
 	while(get_next_line(fd, &line) > 0)
 	{
 		x_size = 0;
@@ -85,6 +87,9 @@ t_point *interpreter(const char* path, t_grid_sizes *grid) //turns string of cha
 
 int	my_key_funct(int keycode, void *param) //stopping loop with esc function
 {
+	t_mlx_acc	*acc;
+
+	acc = param;
 	ft_putstr("Key event: ");
 	ft_putnbr(keycode);
 	if (keycode == 53)
@@ -136,25 +141,28 @@ void	draw_line(float x1, float y1, float x2, float y2, t_mlx_acc acc)
 	return (0);
 }*/
 
-int	main(void)
+int	main(int argc, char **argv)
 {
+	if (argc != 2)
+	{
+		ft_putstr("too many arguments");
+		return (0);
+	}
 	void	*mlx_ptr;
 	void	*win_ptr;
 	int x;
-	int y;
 	t_mlx_acc	acc;
 	t_point		*lst;
 	t_point		*lst2;
 	t_point		*lst_start;
 	t_grid_sizes	*grid;
-	t_matrix		*project;
 
 	mlx_ptr = mlx_init();
-	win_ptr = mlx_new_window(mlx_ptr, 1920, 1080, "NICK");
+	win_ptr = mlx_new_window(mlx_ptr, 600, 600, "NICK");
 	acc.mlx_ptr = mlx_ptr;
 	acc.win_ptr = win_ptr;
-	grid = get_sizes();
-	lst = interpreter("./test_maps/42.fdf", grid);
+	grid = get_sizes(argv[1]);
+	lst = interpreter(argv[1], grid);
 	x = 0;
 	lst2 = lst;
 	lst_start = lst;
