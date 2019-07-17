@@ -6,7 +6,7 @@
 /*   By: no-conne <no-conne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 11:29:29 by no-conne          #+#    #+#             */
-/*   Updated: 2019/07/16 12:26:16 by no-conne         ###   ########.fr       */
+/*   Updated: 2019/07/17 08:06:17 by no-conne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,12 @@ t_point		*vec_subtract(t_point *a, t_point *b);
 t_point		*scalar_vec_multiply(t_point *a, float n);
 t_point		*scalar_vec_multiply(t_point *a, float n);
 t_point		*cross_prod(t_point *a, t_point *b);
+t_matrix	*make_rotate_Zmat(float fAngleRad);
+t_matrix	*make_rotate_Xmat(float fAngleRad);
+t_matrix	*make_rotate_Ymat(float fAngleRad);
+t_matrix	*make_translate_matrix(float x, float y, float z);
+t_matrix	*matrix_multiply_matrix(t_matrix *a, t_matrix *b);
+t_matrix	*make_identity_matrix(void);
+t_matrix	*make_world_matrix(t_matrix *zrot, t_matrix *xrot, t_matrix *transmat);
 
 #endif

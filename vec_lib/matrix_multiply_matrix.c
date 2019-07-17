@@ -1,25 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   make_identity_matrix.c                             :+:      :+:    :+:   */
+/*   matrix_multiply_matrix.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: no-conne <no-conne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/16 12:32:55 by no-conne          #+#    #+#             */
-/*   Updated: 2019/07/17 08:15:55 by no-conne         ###   ########.fr       */
+/*   Created: 2019/07/17 07:39:33 by no-conne          #+#    #+#             */
+/*   Updated: 2019/07/17 07:53:06 by no-conne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/vec.h"
 
-t_matrix	*make_identity_matrix(void)
+t_matrix	*matrix_multiply_matrix(t_matrix *a, t_matrix *b)
 {
-	t_matrix	*i;
+	t_matrix	*m;
+	int i;
+	int j;
 
-	i = (t_matrix *)malloc(sizeof(t_matrix));
-	i->m[0][0] = 1;
-	i->m[1][1] = 1;
-	i->m[2][2] = 1;
-	i->m[3][3] = 1;
-	return (i);
+	i = 0;
+	j = 0;
+	m = NULL;
+	m = init_to_0(m, 4, 4);
+	while (i < 4)
+	{
+		j = 0;
+		while(j < 4)
+		{
+			m->m[j][i] = a->m[j][0] * b->m[0][i] + a->m[j][1] * b->m[1][i] + a->m[j][2] * b->m[2][i] + a->m[j][3] * b->m[3][i];
+			j++;
+		}
+		i++;
+	}
+	return (m);
 }

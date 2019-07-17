@@ -6,7 +6,7 @@
 /*   By: no-conne <no-conne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 11:55:26 by nicholasoco       #+#    #+#             */
-/*   Updated: 2019/07/16 12:32:10 by no-conne         ###   ########.fr       */
+/*   Updated: 2019/07/17 07:54:04 by no-conne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	matrix_vecmultiply(t_point *a, t_matrix *b)
 {
-	float		w;
 	t_point		*o;
 
 	o = (t_point *)malloc(sizeof(t_point));

@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   make_identity_matrix.c                             :+:      :+:    :+:   */
+/*   make_world_matrix.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: no-conne <no-conne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/16 12:32:55 by no-conne          #+#    #+#             */
-/*   Updated: 2019/07/17 08:15:55 by no-conne         ###   ########.fr       */
+/*   Created: 2019/07/17 08:00:48 by no-conne          #+#    #+#             */
+/*   Updated: 2019/07/17 08:06:02 by no-conne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/vec.h"
 
-t_matrix	*make_identity_matrix(void)
+t_matrix	*make_world_matrix(t_matrix *zrot, t_matrix *xrot, t_matrix *transmat)
 {
-	t_matrix	*i;
+	t_matrix	*m;
 
-	i = (t_matrix *)malloc(sizeof(t_matrix));
-	i->m[0][0] = 1;
-	i->m[1][1] = 1;
-	i->m[2][2] = 1;
-	i->m[3][3] = 1;
-	return (i);
+	m = NULL;
+	m = make_identity_matrix();
+	m = matrix_multiply_matrix(zrot, xrot);
+	m = matrix_multiply_matrix(m, transmat);
+	return (m);
 }
