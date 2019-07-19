@@ -6,7 +6,7 @@
 #    By: no-conne <no-conne@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/17 10:12:50 by no-conne          #+#    #+#              #
-#    Updated: 2019/07/17 11:18:07 by no-conne         ###   ########.fr        #
+#    Updated: 2019/07/19 16:02:13 by no-conne         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,12 +38,12 @@ $(NAME):
 	@gcc $(CFLAGS) $(SOURCES) -L $(LIBDIR) -lft -L $(libvecDIR) -lvec -o $(NAME) -L$(LDIR) $(MLX_FLAGS)
 
 clean:
-	rm -rf $(OBJECTS)
+	@rm -rf $(OBJECTS)
 
 fclean: clean
 	@make -C $(LIBDIR)/ fclean
 	@make -C $(libvecDIR)/ fclean
-	rm -rf $(NAME)
+	@rm -rf $(NAME)
 
 re: fclean all
 

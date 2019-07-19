@@ -12,13 +12,12 @@
 
 #include "./includes/libvec.h"
 
-t_point		*scalar_libvec_multiply(t_point *a, float n)
+t_point		scalar_libvec_multiply(t_point a, float n)
 {
-	t_point		*o;
+	t_point		o;
 
-	o = (t_point *)malloc(sizeof(t_point));
-	o->x = a->x * n;
-	o->y = a->y * n;
-	o->z = a->z * n;
+	o.x = a.x * n;
+	o.y = a.y * n;
+	o.z = a.z * n;
 	return (o);
 }

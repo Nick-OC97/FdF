@@ -6,25 +6,23 @@
 /*   By: no-conne <no-conne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/04 09:07:25 by no-conne          #+#    #+#             */
-/*   Updated: 2019/07/17 11:37:53 by no-conne         ###   ########.fr       */
+/*   Updated: 2019/07/19 17:22:26 by no-conne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/main.h"
 #include <stdio.h>
 
-t_grid_sizes		*ft_lstnew_fdf(int x_size, int y_size, int total_size)// puts column, row and total size in a struct
+t_grid_sizes		ft_lstnew_fdf(int x_size, int y_size, int total_size)// puts column, row and total size in a struct
 {
-	t_grid_sizes	*grid;
-	if (!(grid = (t_grid_sizes *)malloc(sizeof(t_grid_sizes))))
-		return (NULL);
-	grid->num_x = x_size;
-	grid->num_y = y_size;
-	grid->num_tot = total_size;
+	t_grid_sizes	grid;
+	grid.num_x = x_size;
+	grid.num_y = y_size;
+	grid.num_tot = total_size;
 	return(grid);
 }
 
-t_grid_sizes		*get_sizes(char *path) //counts column, row and total size 
+t_grid_sizes		get_sizes(char *path) //counts column, row and total size 
 {
 	int x_size;
 	int total_size;
@@ -32,7 +30,7 @@ t_grid_sizes		*get_sizes(char *path) //counts column, row and total size
 	int fd;
 	char *line;
 	char **inf;
-	t_grid_sizes *grid;
+	t_grid_sizes grid;
 
 	x_size = 0;
 	total_size = 0;
@@ -54,7 +52,7 @@ t_grid_sizes		*get_sizes(char *path) //counts column, row and total size
 	return (grid);
 }
 
-t_point *interpreter(const char* path, t_grid_sizes *grid) //turns string of characters into arry of points
+t_point *interpreter(const char* path, t_grid_sizes grid) //turns string of characters into arry of points
 {
 	int fd;
 	char *line;
@@ -65,14 +63,14 @@ t_point *interpreter(const char* path, t_grid_sizes *grid) //turns string of cha
 	t_point *data;
 
 	y = 0;
-	data = (t_point *)malloc(sizeof(t_point) * grid->num_tot);
+	data = (t_point *)malloc(sizeof(t_point) * grid.num_tot);
 	data_s = data;
 	fd = open(path, O_RDONLY);
 	while (get_next_line(fd, &line) > 0)
 	{
 		x = 0;
 		inf = ft_strsplit(line, ' ');
-		while (x < grid->num_x)
+		while (x < grid.num_x)
 		{
 			data->x = x;
 			data->y = y;
@@ -155,7 +153,8 @@ int	main(int argc, char **argv)
 	t_point		*lst;
 	t_point		*lst2;
 	t_point		*lst_start;
-	t_grid_sizes	*grid;
+	t_grid_sizes	grid;
+	t_matrix	translate,rot,rot2;
 
 	mlx_ptr = mlx_init();
 	win_ptr = mlx_new_window(mlx_ptr, 600, 600, "NICK");
@@ -167,32 +166,52 @@ int	main(int argc, char **argv)
 	lst2 = lst;
 	lst_start = lst;
 	lst2++;
-	while (x < (grid->num_tot))										//testing drawing a flat grid x lines
+	translate = make_translate_matrix(300,300,0);
+	rot = make_rotate_Xmat(1);
+	rot2 = make_rotate_Ymat(1);
+	while (x < (grid.num_tot))									//moving grid
 	{
-		if (lst->x == grid->num_x - 1 && lst->y == grid->num_y - 1)
+		lst[x] = scalar_libvec_multiply(lst[x], 20);
+		lst[x] = matrix_libvecmultiply(lst[x], rot);
+		lst[x] = matrix_libvecmultiply(lst[x], rot2);
+		lst[x] = matrix_libvecmultiply(lst[x], translate);
+		ft_putnbr(lst[x].x);
+		ft_putchar('\n');
+		mlx_pixel_put(acc.mlx_ptr, acc.win_ptr, lst[x].x, lst[x].y, 0xffffff);
+		x++;
+	}
+	/* lst = lst_start;
+	x = 0;
+ 	while (x < (grid.num_tot))										//testing drawing a flat grid x lines
+	{
+		if (lst->x == grid.num_x - 1 && lst->y == grid.num_y - 1)
 			break;
-		if (lst->x == grid->num_x - 1)
+		if (lst->x == grid.num_x - 1)
 		{
 			lst++;
 			lst2++;
 		}
+		ft_putnbr(lst->x);
+		ft_putchar('\n');
+		ft_putnbr(lst->y);
+		ft_putchar('\n'); 
 		draw_line(lst->x, lst->y, lst2->x, lst2->y, acc);
 		x++;
 		lst++;
 		lst2++;
 	}
 	lst = lst_start;
-	lst2 = lst + grid->num_x;
+	lst2 = lst + grid.num_x;
 	x = 0;
-	while (x < (grid->num_tot))										//testing drawing a flat grid y lines
+	while (x < (grid.num_tot))										//testing drawing a flat grid y lines
 	{
-		if (lst->x == 0 && lst->y == grid->num_y - 1)
+		if (lst->x == 0 && lst->y == grid.num_y - 1)
 			break;
 		draw_line(lst->x, lst->y, lst2->x, lst2->y, acc);
 		x++;
 		lst++;
 		lst2++;
-	}
+	} */
 	mlx_key_hook(win_ptr, my_key_funct, &acc);
 	//mlx_mouse_hook(win_ptr, pepe, &acc);
 	mlx_loop(mlx_ptr);
