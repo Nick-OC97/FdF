@@ -6,7 +6,7 @@
 #    By: no-conne <no-conne@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/17 10:12:50 by no-conne          #+#    #+#              #
-#    Updated: 2019/07/19 16:02:13 by no-conne         ###   ########.fr        #
+#    Updated: 2019/07/22 14:16:16 by no-conne         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,10 @@ CFLAGS = -Wall -Werror -Wextra -I$(IDIR)
 
 MLX_FLAGS = -lmlx -framework OpenGL -framework AppKit
 
-SOURCES = main.c \
+SOURCES =	main.c			\
+			draw_func.c		\
+			interpreter.c	\
+			translator.c	\
 
 OBJECTS = *.o
 
