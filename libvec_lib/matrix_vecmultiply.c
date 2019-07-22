@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   matrix_libvecmultiply.c                               :+:      :+:    :+:   */
+/*   matrix_vecmultiply.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: no-conne <no-conne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 11:55:26 by nicholasoco       #+#    #+#             */
-/*   Updated: 2019/07/17 07:54:04 by no-conne         ###   ########.fr       */
+/*   Updated: 2019/07/22 07:40:20 by no-conne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/libvec.h"
 
-t_point		matrix_libvecmultiply(t_point a, t_matrix b)
+t_point		matrix_vecmultiply(t_point a, t_matrix b)
 {
 	t_point		o;
 	

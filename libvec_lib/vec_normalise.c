@@ -12,13 +12,13 @@
 
 #include "./includes/libvec.h"
 
-t_point		*libvec_normalise(t_point *a, t_point *b)
+t_point		vec_normalise(t_point a, t_point b)
 {
 	float l;
 
 	l = magnitude(a, b);
-	a->x = a->x / l;
-	a->y = a->y / l;
-	a->z = a->z / l;
+	a.x = a.x / l;
+	a.y = a.y / l;
+	a.z = a.z / l;
 	return (a);
 }

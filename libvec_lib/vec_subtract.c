@@ -12,13 +12,12 @@
 
 #include "./includes/libvec.h"
 
-t_point		*libvec_subtract(t_point *a, t_point *b)
+t_point		vec_subtract(t_point a, t_point b)
 {
-	t_point		*o;
+	t_point		o;
 
-	o = (t_point *)malloc(sizeof(t_point));
-	o->x = b->x - a->x;
-	o->y = b->y - a->y;
-	o->z = b->z - a->z;
+	o.x = b.x - a.x;
+	o.y = b.y - a.y;
+	o.z = b.z - a.z;
 	return (o);
 }

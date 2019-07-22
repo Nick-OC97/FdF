@@ -6,7 +6,7 @@
 /*   By: no-conne <no-conne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/04 09:07:25 by no-conne          #+#    #+#             */
-/*   Updated: 2019/07/19 17:22:26 by no-conne         ###   ########.fr       */
+/*   Updated: 2019/07/22 09:29:02 by no-conne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,10 +102,6 @@ void	draw_line(float x1, float y1, float x2, float y2, t_mlx_acc acc)
 	float step;
 	float i;
 
-	x1 = x1 * 20;
-	y1 = y1 * 20;
-	x2 = x2 * 20;
-	y2 = y2 * 20;
 	dx = (x2 - x1);
 	dy = (y2 - y1);
 	if (fabsf(dx) >= fabsf(dy))
@@ -151,8 +147,9 @@ int	main(int argc, char **argv)
 	int x;
 	t_mlx_acc	acc;
 	t_point		*lst;
-	t_point		*lst2;
-	t_point		*lst_start;
+	t_point		gridt;
+	//t_point		*lst2;
+	//t_point		*lst_start;
 	t_grid_sizes	grid;
 	t_matrix	translate,rot,rot2;
 
@@ -163,55 +160,61 @@ int	main(int argc, char **argv)
 	grid = get_sizes(argv[1]);
 	lst = interpreter(argv[1], grid);
 	x = 0;
-	lst2 = lst;
-	lst_start = lst;
-	lst2++;
+	//lst2 = lst;
+	//lst_start = lst;
+	//lst2++;
 	translate = make_translate_matrix(300,300,0);
 	rot = make_rotate_Xmat(1);
 	rot2 = make_rotate_Ymat(1);
+	gridt.x = grid.num_x - 1;
+	gridt.y = grid.num_y - 1;
+	printf("this is gridt.x: %f\nthis is lsx.x %f\n", gridt.x, lst[grid.num_x - 1].x);
 	while (x < (grid.num_tot))									//moving grid
 	{
-		lst[x] = scalar_libvec_multiply(lst[x], 20);
-		lst[x] = matrix_libvecmultiply(lst[x], rot);
-		lst[x] = matrix_libvecmultiply(lst[x], rot2);
-		lst[x] = matrix_libvecmultiply(lst[x], translate);
-		ft_putnbr(lst[x].x);
-		ft_putchar('\n');
+		lst[x] = scalar_vec_multiply(lst[x], 20);
+		lst[x] = matrix_vecmultiply(lst[x], rot);
+		lst[x] = matrix_vecmultiply(lst[x], rot2);
+		lst[x] = matrix_vecmultiply(lst[x], translate);
+		//ft_putnbr(lst[x].x);
+		//ft_putchar('\n');
 		mlx_pixel_put(acc.mlx_ptr, acc.win_ptr, lst[x].x, lst[x].y, 0xffffff);
 		x++;
 	}
-	/* lst = lst_start;
+	gridt = scalar_vec_multiply(gridt, 20);
+	gridt = matrix_vecmultiply(gridt, rot);
+	gridt = matrix_vecmultiply(gridt, rot2);
+	gridt = matrix_vecmultiply(gridt, translate);
+	//lst = lst_start;
 	x = 0;
  	while (x < (grid.num_tot))										//testing drawing a flat grid x lines
 	{
-		if (lst->x == grid.num_x - 1 && lst->y == grid.num_y - 1)
+		printf("%d this is lst->x %f /nthis is gridt->x %f\n", x, lst[x].x, gridt.x);
+		if (lst[x].x == gridt.x && lst[x].y == gridt.y)
 			break;
-		if (lst->x == grid.num_x - 1)
+		//printf(" THIS IS X %d\n", x);
+		//printf("AAAAx mod = %d\n", (x % (grid.num_x -1)));
+		/* if (x != 0 && x % (grid.num_x - 1) == 0)
+			x++; */
+		else
 		{
-			lst++;
-			lst2++;
+			draw_line(lst[x].x, lst[x].y, lst[x + 1].x, lst[x + 1].y, acc);
+			x++;
 		}
-		ft_putnbr(lst->x);
-		ft_putchar('\n');
-		ft_putnbr(lst->y);
-		ft_putchar('\n'); 
-		draw_line(lst->x, lst->y, lst2->x, lst2->y, acc);
-		x++;
-		lst++;
-		lst2++;
+		//lst++;
+		//lst2++;
 	}
-	lst = lst_start;
-	lst2 = lst + grid.num_x;
+	/* lst = lst_start;
+	lst2 = lst + grid.num_x; */
 	x = 0;
 	while (x < (grid.num_tot))										//testing drawing a flat grid y lines
 	{
-		if (lst->x == 0 && lst->y == grid.num_y - 1)
+		if (lst[x].y == gridt.y)
 			break;
-		draw_line(lst->x, lst->y, lst2->x, lst2->y, acc);
+		draw_line(lst[x].x, lst[x].y, lst[x + grid.num_x].x, lst[x + grid.num_x].y, acc);
 		x++;
-		lst++;
-		lst2++;
-	} */
+		//lst++;
+		//lst2++;
+	}
 	mlx_key_hook(win_ptr, my_key_funct, &acc);
 	//mlx_mouse_hook(win_ptr, pepe, &acc);
 	mlx_loop(mlx_ptr);
