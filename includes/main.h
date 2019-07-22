@@ -6,7 +6,7 @@
 /*   By: no-conne <no-conne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/04 14:07:49 by no-conne          #+#    #+#             */
-/*   Updated: 2019/07/22 14:49:06 by no-conne         ###   ########.fr       */
+/*   Updated: 2019/07/22 15:07:07 by no-conne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,17 @@ typedef struct s_grid_sizes
 	int		num_x;
 	int		num_y;
 	int		num_tot;
-	//float	num_xt;
-	//float	num_yt;
 }				t_grid_sizes;
+
+typedef struct s_info
+{
+	int		x_size;
+	int		total_size;
+	int		y_size;
+	int		fd;
+	char	*line;
+	char	**inf;
+}				t_info;
 
 void				draw_func(t_point *lst, t_grid_sizes grid, t_mlx_acc acc);
 t_grid_sizes		ft_lstnew_fdf(int x_size, int y_size, int total_size);
