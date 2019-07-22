@@ -6,7 +6,7 @@
 /*   By: no-conne <no-conne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/04 09:07:25 by no-conne          #+#    #+#             */
-/*   Updated: 2019/07/22 09:29:02 by no-conne         ###   ########.fr       */
+/*   Updated: 2019/07/22 12:32:04 by no-conne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,11 +145,10 @@ int	main(int argc, char **argv)
 	void	*mlx_ptr;
 	void	*win_ptr;
 	int x;
+	int j;
 	t_mlx_acc	acc;
 	t_point		*lst;
 	t_point		gridt;
-	//t_point		*lst2;
-	//t_point		*lst_start;
 	t_grid_sizes	grid;
 	t_matrix	translate,rot,rot2;
 
@@ -160,9 +159,6 @@ int	main(int argc, char **argv)
 	grid = get_sizes(argv[1]);
 	lst = interpreter(argv[1], grid);
 	x = 0;
-	//lst2 = lst;
-	//lst_start = lst;
-	//lst2++;
 	translate = make_translate_matrix(300,300,0);
 	rot = make_rotate_Xmat(1);
 	rot2 = make_rotate_Ymat(1);
@@ -175,8 +171,6 @@ int	main(int argc, char **argv)
 		lst[x] = matrix_vecmultiply(lst[x], rot);
 		lst[x] = matrix_vecmultiply(lst[x], rot2);
 		lst[x] = matrix_vecmultiply(lst[x], translate);
-		//ft_putnbr(lst[x].x);
-		//ft_putchar('\n');
 		mlx_pixel_put(acc.mlx_ptr, acc.win_ptr, lst[x].x, lst[x].y, 0xffffff);
 		x++;
 	}
@@ -184,27 +178,22 @@ int	main(int argc, char **argv)
 	gridt = matrix_vecmultiply(gridt, rot);
 	gridt = matrix_vecmultiply(gridt, rot2);
 	gridt = matrix_vecmultiply(gridt, translate);
-	//lst = lst_start;
 	x = 0;
+	j = 1;
  	while (x < (grid.num_tot))										//testing drawing a flat grid x lines
 	{
 		printf("%d this is lst->x %f /nthis is gridt->x %f\n", x, lst[x].x, gridt.x);
 		if (lst[x].x == gridt.x && lst[x].y == gridt.y)
 			break;
-		//printf(" THIS IS X %d\n", x);
-		//printf("AAAAx mod = %d\n", (x % (grid.num_x -1)));
-		/* if (x != 0 && x % (grid.num_x - 1) == 0)
-			x++; */
-		else
+		if (j < grid.num_x)
 		{
 			draw_line(lst[x].x, lst[x].y, lst[x + 1].x, lst[x + 1].y, acc);
-			x++;
 		}
-		//lst++;
-		//lst2++;
+		else
+			j = 0;
+		x++;
+		j++;
 	}
-	/* lst = lst_start;
-	lst2 = lst + grid.num_x; */
 	x = 0;
 	while (x < (grid.num_tot))										//testing drawing a flat grid y lines
 	{
@@ -212,8 +201,6 @@ int	main(int argc, char **argv)
 			break;
 		draw_line(lst[x].x, lst[x].y, lst[x + grid.num_x].x, lst[x + grid.num_x].y, acc);
 		x++;
-		//lst++;
-		//lst2++;
 	}
 	mlx_key_hook(win_ptr, my_key_funct, &acc);
 	//mlx_mouse_hook(win_ptr, pepe, &acc);
