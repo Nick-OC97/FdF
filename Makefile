@@ -6,7 +6,7 @@
 #    By: no-conne <no-conne@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/17 10:12:50 by no-conne          #+#    #+#              #
-#    Updated: 2019/07/22 14:16:16 by no-conne         ###   ########.fr        #
+#    Updated: 2019/07/23 13:38:27 by no-conne         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SOURCES =	main.c			\
 			draw_func.c		\
 			interpreter.c	\
 			translator.c	\
+			images.c		\
 
 OBJECTS = *.o
 
