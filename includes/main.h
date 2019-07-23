@@ -6,7 +6,7 @@
 /*   By: no-conne <no-conne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/04 14:07:49 by no-conne          #+#    #+#             */
-/*   Updated: 2019/07/22 15:07:07 by no-conne         ###   ########.fr       */
+/*   Updated: 2019/07/23 09:18:47 by no-conne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include "../resources/minilibx_macos/mlx.h"
 # include "../libvec_lib/includes/libvec.h"
 # include <math.h>
+# define WIN_H 800
+# define WIN_W 800
 
 typedef struct s_mlx_acc
 {
@@ -40,6 +42,13 @@ typedef struct s_info
 	char	*line;
 	char	**inf;
 }				t_info;
+
+typedef struct s_master
+{
+	t_mlx_acc		acc;
+	t_point			*lst;
+	t_grid_sizes	grid;
+}				t_master;
 
 void				draw_func(t_point *lst, t_grid_sizes grid, t_mlx_acc acc);
 t_grid_sizes		ft_lstnew_fdf(int x_size, int y_size, int total_size);

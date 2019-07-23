@@ -6,7 +6,7 @@
 /*   By: no-conne <no-conne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/22 13:32:27 by no-conne          #+#    #+#             */
-/*   Updated: 2019/07/22 14:51:19 by no-conne         ###   ########.fr       */
+/*   Updated: 2019/07/23 10:03:08 by no-conne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	draw_line(t_point p1, t_point p2, t_mlx_acc acc)
 	dx = dx / step;
 	dy = dy / step;
 	i = 1;
+	mlx_clear_window(acc.mlx_ptr, acc.win_ptr);
 	while (i < step)
 	{
 		mlx_pixel_put(acc.mlx_ptr, acc.win_ptr, p1.x, p1.y, 0xFFFFFF);

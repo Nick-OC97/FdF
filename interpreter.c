@@ -6,7 +6,7 @@
 /*   By: no-conne <no-conne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/22 13:50:09 by no-conne          #+#    #+#             */
-/*   Updated: 2019/07/22 15:15:53 by no-conne         ###   ########.fr       */
+/*   Updated: 2019/07/23 10:09:01 by no-conne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ t_grid_sizes		get_sizes(char *path)
 			info.total_size++;
 			info.x_size++;
 		}
+		free(info.inf);						//this
 		info.y_size++;
 	}
 	grid = ft_lstnew_fdf(info.x_size, info.y_size, info.total_size);
@@ -67,6 +68,7 @@ t_point				*interpreter(const char *path, t_grid_sizes grid)
 			info.x_size++;
 			data++;
 		}
+		free(info.inf);						//this
 		info.y_size++;
 	}
 	return (data_s);
