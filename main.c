@@ -6,7 +6,7 @@
 /*   By: no-conne <no-conne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/04 09:07:25 by no-conne          #+#    #+#             */
-/*   Updated: 2019/07/23 10:06:24 by no-conne         ###   ########.fr       */
+/*   Updated: 2019/07/23 12:01:38 by no-conne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,5 @@ int	main(int argc, char **argv)
 	mlx_key_hook(win_ptr, my_key_funct, &acc);
 	mlx_key_hook(win_ptr, move_func, &master);
 	mlx_loop(mlx_ptr);
-	free(lst);
 	return (0);
 }

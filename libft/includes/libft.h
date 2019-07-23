@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: no-conne <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: no-conne <no-conne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 15:42:19 by no-conne          #+#    #+#             */
-/*   Updated: 2019/07/04 14:14:01 by no-conne         ###   ########.fr       */
+/*   Updated: 2019/07/23 12:47:42 by no-conne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
-# define BUFF_SIZE 1
+# define BUFF_SIZE 32
 # define MALLCHECK(x) if (!x) return (-1)
 
 # include <unistd.h>
