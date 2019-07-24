@@ -6,7 +6,7 @@
 /*   By: no-conne <no-conne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/04 14:07:49 by no-conne          #+#    #+#             */
-/*   Updated: 2019/07/24 07:45:47 by no-conne         ###   ########.fr       */
+/*   Updated: 2019/07/24 16:08:14 by no-conne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,16 +58,26 @@ typedef struct s_image
 typedef struct s_master
 {
 	t_mlx_acc		acc;
-	t_point			*lst;
 	t_grid_sizes	grid;
 	t_image			img;
+	float			xt;
+	float			yt;
+	float			zt;
+	float			xa;
+	float			ya;
+	float			za;
+	float			trans_x;
+	float			trans_y;
+	float			trans_z;
+	t_point			*screen_coords;
+	t_point			*original_coords;
 }				t_master;
 
-void				draw_func(t_master master);
+void				draw_func(t_master *master);
 t_grid_sizes		ft_lstnew_fdf(int x_size, int y_size, int total_size);
 t_grid_sizes		get_sizes(char *path);
-t_point				*interpreter(const char* path, t_grid_sizes grid);
-void				translator(t_master master);
+void				interpreter(const char* path, t_master *master);
+void				translator(t_master *master);
 void				clear_image(t_image *img, int color);
 void				init_img(t_mlx_acc acc, t_image *img, int width, int height);
 void				put_pxlto_img(t_image *img, int color, int x, int y);
