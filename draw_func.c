@@ -6,14 +6,14 @@
 /*   By: no-conne <no-conne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/22 13:32:27 by no-conne          #+#    #+#             */
-/*   Updated: 2019/07/23 10:03:08 by no-conne         ###   ########.fr       */
+/*   Updated: 2019/07/24 07:44:16 by no-conne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/main.h"
 #include <stdio.h>
 
-void	draw_line(t_point p1, t_point p2, t_mlx_acc acc)
+void	draw_line(t_point p1, t_point p2, t_master master)
 {
 	float dx;
 	float dy;
@@ -29,38 +29,40 @@ void	draw_line(t_point p1, t_point p2, t_mlx_acc acc)
 	dx = dx / step;
 	dy = dy / step;
 	i = 1;
-	mlx_clear_window(acc.mlx_ptr, acc.win_ptr);
+	mlx_clear_window(master.acc.mlx_ptr, master.acc.win_ptr);
 	while (i < step)
 	{
-		mlx_pixel_put(acc.mlx_ptr, acc.win_ptr, p1.x, p1.y, 0xFFFFFF);
+		//mlx_pixel_put(acc.mlx_ptr, acc.win_ptr, p1.x, p1.y, 0xFFFFFF);
+		put_pxlto_img(&master.img, 0xFFFFFF, p1.x, p1.y);
 		p1.x = p1.x + dx;
 		p1.y = p1.y + dy;
 		i++;
 	}
-	mlx_pixel_put(acc.mlx_ptr, acc.win_ptr, p1.x, p1.y, 0xFFFFFF);
+	//mlx_pixel_put(master.acc.mlx_ptr, master.acc.win_ptr, p1.x, p1.y, 0xFFFFFF);
+	put_pxlto_img(&master.img, 0xFFFFFF, p1.x, p1.y);
 }
 
-void	draw_func(t_point *lst, t_grid_sizes grid, t_mlx_acc acc)
+void	draw_func(t_master master)
 {
 	int x;
 	int j;
 
 	x = 0;
 	j = 1;
-	while (x < (grid.num_tot))
+	while (x < (master.grid.num_tot))
 	{
-		if (j < grid.num_x)
-			draw_line(lst[x], lst[x + 1], acc);
+		if (j < master.grid.num_x)
+			draw_line(master.lst[x], master.lst[x + 1], master);
 		else
 			j = 0;
 		x++;
 		j++;
 	}
 	x = 0;
-	while (x < (grid.num_tot))
+	while (x < (master.grid.num_tot))
 	{
-		if (x < grid.num_tot - grid.num_x)
-			draw_line(lst[x], lst[x + grid.num_x], acc);
+		if (x < master.grid.num_tot - master.grid.num_x)
+			draw_line(master.lst[x], master.lst[x + master.grid.num_x], master);
 		x++;
 	}
 }

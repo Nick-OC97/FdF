@@ -6,7 +6,7 @@
 /*   By: no-conne <no-conne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/04 09:07:25 by no-conne          #+#    #+#             */
-/*   Updated: 2019/07/23 13:54:23 by no-conne         ###   ########.fr       */
+/*   Updated: 2019/07/24 07:48:14 by no-conne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	move_func(int keycode, void *param)
 			master->lst[x] = matrix_vecmultiply(master->lst[x], trans);
 			x++;
 		}
-		draw_func(master->lst, master->grid, master->acc);
+		draw_func(master[0]);
 	}
 	return (1);
 } 
@@ -54,10 +54,9 @@ int	main(int argc, char **argv)
 	void			*mlx_ptr;
 	void			*win_ptr;
 	t_mlx_acc		acc;
-	//t_point			*lst;
-	//t_grid_sizes	grid;
+	t_point			*lst;
+	t_grid_sizes	grid;
 	t_master		master;
-	(void)argv;
 	if (argc != 2)
 	{
 		ft_putstr("Wrong number of arguments");
@@ -69,16 +68,15 @@ int	main(int argc, char **argv)
 	acc.win_ptr = win_ptr;
 	master.acc = acc;
 	init_img(master.acc, &master.img, WIN_W, WIN_H);
-	clear_image(&master.img, 0xff0000);
-	put_img(master.acc, &master.img);
-	/* grid = get_sizes(argv[1]);
+	clear_image(&master.img, 0x000000);
+	grid = get_sizes(argv[1]);
 	lst = interpreter(argv[1], grid);
-	translator(lst, acc, grid);
-	master.acc = acc;
 	master.grid = grid;
 	master.lst = lst;
+	translator(master);
+	put_img(master.acc, &master.img);
 	mlx_key_hook(win_ptr, my_key_funct, &acc);
-	mlx_key_hook(win_ptr, move_func, &master);*/
+	mlx_key_hook(win_ptr, move_func, &master);
 	mlx_loop(mlx_ptr);
 	return (0);
 }
