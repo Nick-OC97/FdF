@@ -6,7 +6,7 @@
 /*   By: no-conne <no-conne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 13:04:15 by no-conne          #+#    #+#             */
-/*   Updated: 2019/07/23 13:37:40 by no-conne         ###   ########.fr       */
+/*   Updated: 2019/07/24 07:55:16 by no-conne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	clear_image(t_image *img, int color)
 
 	data = (int *)img->raw_data;
 	i = 0;
-	while(i < (img->width * img->height))
+	while (i < (img->width * img->height))
 	{
 		data[i] = color;
 		i++;
@@ -52,5 +52,6 @@ void	put_pxlto_img(t_image *img, int color, int x, int y)
 
 void	put_img(t_mlx_acc acc, t_image *img)
 {
-	mlx_put_image_to_window(acc.mlx_ptr, acc.win_ptr, img->img_ptr, img->pos.x, img->pos.y);
+	mlx_put_image_to_window(acc.mlx_ptr, acc.win_ptr, img->img_ptr,
+	img->pos.x, img->pos.y);
 }

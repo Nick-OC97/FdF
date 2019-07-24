@@ -6,7 +6,7 @@
 /*   By: no-conne <no-conne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/22 13:50:09 by no-conne          #+#    #+#             */
-/*   Updated: 2019/07/23 12:05:24 by no-conne         ###   ########.fr       */
+/*   Updated: 2019/07/24 07:54:35 by no-conne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,12 @@ t_grid_sizes		get_sizes(char *path)
 	return (grid);
 }
 
+void				free_func(t_info info)
+{
+	free(info.inf);
+	free(info.line);
+}
+
 t_point				*interpreter(const char *path, t_grid_sizes grid)
 {
 	t_info	info;
@@ -71,10 +77,8 @@ t_point				*interpreter(const char *path, t_grid_sizes grid)
 			info.x_size++;
 			data++;
 		}
-		free(info.inf);
-		free(info.line);
+		free_func(info);
 		info.y_size++;
 	}
-	//while (1);
 	return (data_s);
 }
