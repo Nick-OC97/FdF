@@ -6,7 +6,7 @@
 /*   By: no-conne <no-conne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/04 09:07:25 by no-conne          #+#    #+#             */
-/*   Updated: 2019/07/24 16:36:18 by no-conne         ###   ########.fr       */
+/*   Updated: 2019/07/24 16:43:48 by no-conne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	scale_func_l(t_master *master)
 	put_img(master[0].acc, &master->img);
 }
 
-void	rot_func_x(t_master *master)
+void	rot_func_xu(t_master *master)
 {
 	master->xa = master->xa + 0.1;
 	translator(master);
@@ -78,9 +78,27 @@ void	rot_func_x(t_master *master)
 	put_img(master->acc, &master->img);
 }
 
-void	rot_func_y(t_master *master)
+void	rot_func_xd(t_master *master)
+{
+	master->xa = master->xa - 0.1;
+	translator(master);
+	clear_image(&master->img, 0x000000);
+	draw_func(master);
+	put_img(master->acc, &master->img);
+}
+
+void	rot_func_yl(t_master *master)
 {
 	master->ya = master->ya + 0.1;
+	translator(master);
+	clear_image(&master->img, 0x000000);
+	draw_func(master);
+	put_img(master->acc, &master->img);
+}
+
+void	rot_func_yr(t_master *master)
+{
+	master->ya = master->ya - 0.1;
 	translator(master);
 	clear_image(&master->img, 0x000000);
 	draw_func(master);
@@ -106,9 +124,13 @@ int	my_key_funct(int keycode, t_master *master)
 	if (keycode == 69)
 		scale_func_l(master);
 	if (keycode == 12)
-		rot_func_x(master);
+		rot_func_xu(master);
 	if (keycode == 13)
-		rot_func_y(master);
+		rot_func_xd(master);
+	if (keycode == 0)
+		rot_func_yr(master);
+	if (keycode == 1)
+		rot_func_yl(master);
 	return (1);
 }
 
