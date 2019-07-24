@@ -6,7 +6,7 @@
 /*   By: no-conne <no-conne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/04 09:07:25 by no-conne          #+#    #+#             */
-/*   Updated: 2019/07/24 10:40:20 by no-conne         ###   ########.fr       */
+/*   Updated: 2019/07/24 10:50:44 by no-conne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,40 @@ void	move_func_d(t_master *master)
 	put_img(master[0].acc, &master[0].img);
 }
 
+void	scale_func_s(t_master *master)
+{
+	int x;
+
+	x = 0;
+	while (x < (master->grid.num_tot))
+	{
+		master->lst[x] = scalar_vec_multiply(master->lst[x], 0.5);
+		//lst[x] = matrix_vecmultiply(lst[x], rot);
+		//lst[x] = matrix_vecmultiply(lst[x], rot2);
+		x++;
+	}
+	clear_image(&master[0].img, 0x000000);
+	draw_func(master[0]);
+	put_img(master[0].acc, &master[0].img);
+}
+
+void	scale_func_l(t_master *master)
+{
+	int x;
+
+	x = 0;
+	while (x < (master->grid.num_tot))
+	{
+		master->lst[x] = scalar_vec_multiply(master->lst[x], 1.5);
+		//lst[x] = matrix_vecmultiply(lst[x], rot);
+		//lst[x] = matrix_vecmultiply(lst[x], rot2);
+		x++;
+	}
+	clear_image(&master[0].img, 0x000000);
+	draw_func(master[0]);
+	put_img(master[0].acc, &master[0].img);
+}
+
 int	my_key_funct(int keycode, t_master *master)
 {
 	ft_putstr("Key event: ");
@@ -107,6 +141,10 @@ int	my_key_funct(int keycode, t_master *master)
 		move_func_u(master);
 	if (keycode == 126)
 		move_func_d(master);
+	if (keycode == 78)
+		scale_func_s(master);
+	if (keycode == 69)
+		scale_func_l(master);
 	return (1);
 }
 
