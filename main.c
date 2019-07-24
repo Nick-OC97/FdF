@@ -6,47 +6,107 @@
 /*   By: no-conne <no-conne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/04 09:07:25 by no-conne          #+#    #+#             */
-/*   Updated: 2019/07/24 08:22:44 by no-conne         ###   ########.fr       */
+/*   Updated: 2019/07/24 10:40:20 by no-conne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/main.h"
 #include <stdio.h>
 
-int	my_key_funct(int keycode, void *param)
+void	move_func_l(t_master *master)
 {
-	t_mlx_acc	*acc;
+	int x;
+	t_matrix	trans;
 
-	acc = param;
+	x = 0;
+	trans = make_translate_matrix(-10, 0, 0);
+	while (x < (master->grid.num_tot))
+	{
+		//lst[x] = scalar_vec_multiply(lst[x], 20);
+		//lst[x] = matrix_vecmultiply(lst[x], rot);
+		//lst[x] = matrix_vecmultiply(lst[x], rot2);
+		master->lst[x] = matrix_vecmultiply(master->lst[x], trans);
+		x++;
+	}
+	clear_image(&master[0].img, 0x000000);
+	draw_func(master[0]);
+	put_img(master[0].acc, &master[0].img);
+}
+
+void	move_func_r(t_master *master)
+{
+	int x;
+	t_matrix	trans;
+
+	x = 0;
+	trans = make_translate_matrix(10, 0, 0);
+	while (x < (master->grid.num_tot))
+	{
+		//lst[x] = scalar_vec_multiply(lst[x], 20);
+		//lst[x] = matrix_vecmultiply(lst[x], rot);
+		//lst[x] = matrix_vecmultiply(lst[x], rot2);
+		master->lst[x] = matrix_vecmultiply(master->lst[x], trans);
+		x++;
+	}
+	clear_image(&master[0].img, 0x000000);
+	draw_func(master[0]);
+	put_img(master[0].acc, &master[0].img);
+}
+
+void	move_func_u(t_master *master)
+{
+	int x;
+	t_matrix	trans;
+
+	x = 0;
+	trans = make_translate_matrix(0, 10, 0);
+	while (x < (master->grid.num_tot))
+	{
+		//lst[x] = scalar_vec_multiply(lst[x], 20);
+		//lst[x] = matrix_vecmultiply(lst[x], rot);
+		//lst[x] = matrix_vecmultiply(lst[x], rot2);
+		master->lst[x] = matrix_vecmultiply(master->lst[x], trans);
+		x++;
+	}
+	clear_image(&master[0].img, 0x000000);
+	draw_func(master[0]);
+	put_img(master[0].acc, &master[0].img);
+}
+
+void	move_func_d(t_master *master)
+{
+	int x;
+	t_matrix	trans;
+
+	x = 0;
+	trans = make_translate_matrix(0, -10, 0);
+	while (x < (master->grid.num_tot))
+	{
+		//lst[x] = scalar_vec_multiply(lst[x], 20);
+		//lst[x] = matrix_vecmultiply(lst[x], rot);
+		//lst[x] = matrix_vecmultiply(lst[x], rot2);
+		master->lst[x] = matrix_vecmultiply(master->lst[x], trans);
+		x++;
+	}
+	clear_image(&master[0].img, 0x000000);
+	draw_func(master[0]);
+	put_img(master[0].acc, &master[0].img);
+}
+
+int	my_key_funct(int keycode, t_master *master)
+{
 	ft_putstr("Key event: ");
 	ft_putnbr(keycode);
 	if (keycode == 53)
 		exit(0);
-	return (1);
-}
-
-int	move_func(int keycode, void *param)
-{
-	int x;
-	t_matrix	trans;
-	t_master	*master;
-
-	master = param;
-	x = 0;
 	if (keycode == 123)
-	{
-		trans = make_translate_matrix(-10, 0, 0);
-		while (x < (master->grid.num_tot))
-		{
-			//lst[x] = scalar_vec_multiply(lst[x], 20);
-			//lst[x] = matrix_vecmultiply(lst[x], rot);
-			//lst[x] = matrix_vecmultiply(lst[x], rot2);
-			master->lst[x] = matrix_vecmultiply(master->lst[x], trans);
-			x++;
-		}
-		draw_func(master[0]);
-		put_img(master[0].acc, &master[0].img);
-	}
+		move_func_l(master);
+	if (keycode == 124)
+		move_func_r(master);
+	if (keycode == 125)
+		move_func_u(master);
+	if (keycode == 126)
+		move_func_d(master);
 	return (1);
 }
 
@@ -71,8 +131,10 @@ int	main(int argc, char **argv)
 	master.lst = interpreter(argv[1], master.grid);
 	translator(master);
 	put_img(master.acc, &master.img);
-	mlx_key_hook(win_ptr, my_key_funct, &master.acc);
-	mlx_key_hook(win_ptr, move_func, &master);
+	//mlx_key_hook(win_ptr, move_func_l, &master);
+	//mlx_key_hook(win_ptr, my_key_funct, &master);
+	mlx_hook(win_ptr, 2, 0, my_key_funct,&master);
+	//mlx_hook(win_ptr, 2, 0, move_func_l,&master);
 	mlx_loop(mlx_ptr);
 	return (0);
 }

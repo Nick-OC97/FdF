@@ -6,7 +6,7 @@
 /*   By: no-conne <no-conne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/22 13:32:27 by no-conne          #+#    #+#             */
-/*   Updated: 2019/07/24 08:27:52 by no-conne         ###   ########.fr       */
+/*   Updated: 2019/07/24 10:11:35 by no-conne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	draw_line(t_point p1, t_point p2, t_master master)
 	dx = dx / step;
 	dy = dy / step;
 	i = 1;
-	mlx_clear_window(master.acc.mlx_ptr, master.acc.win_ptr);
 	while (i < step)
 	{
 		put_pxlto_img(&master.img, 0xFFFFFF, p1.x, p1.y);
