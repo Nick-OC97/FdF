@@ -6,7 +6,7 @@
 #    By: no-conne <no-conne@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/17 10:12:50 by no-conne          #+#    #+#              #
-#    Updated: 2019/07/26 07:50:08 by no-conne         ###   ########.fr        #
+#    Updated: 2019/07/26 11:18:03 by no-conne         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ SOURCES =	main.c			\
 			key_funcs.c		\
 			key_funcs2.c	\
 			key_funcs3.c	\
+			error_check.c	\
 
 OBJECTS = *.o
 

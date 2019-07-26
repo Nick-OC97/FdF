@@ -6,7 +6,7 @@
 /*   By: no-conne <no-conne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/04 14:07:49 by no-conne          #+#    #+#             */
-/*   Updated: 2019/07/26 08:15:31 by no-conne         ###   ########.fr       */
+/*   Updated: 2019/07/26 11:18:46 by no-conne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,7 @@ void				rot_func_xd(t_master *master);
 void				rot_func_yl(t_master *master);
 void				rot_func_yr(t_master *master);
 void				color_func(t_master *master, int keycode);
+int					arr_size(char **lst);
+void				checker(t_master *master, t_info info);
 
 #endif

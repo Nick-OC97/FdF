@@ -6,7 +6,7 @@
 /*   By: no-conne <no-conne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/22 14:04:18 by no-conne          #+#    #+#             */
-/*   Updated: 2019/07/26 08:55:32 by no-conne         ###   ########.fr       */
+/*   Updated: 2019/07/26 09:13:54 by no-conne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void	translator(t_master *master)
 
 	translate = make_translate_matrix(master->trans_x, master->trans_y,
 	master->trans_z);
-	rot = make_rotate_Xmat(master->xa);
-	rot2 = make_rotate_Ymat(master->ya);
+	rot = make_rotate_xmat(master->xa);
+	rot2 = make_rotate_ymat(master->ya);
 	scale = make_scale_matrix(master->xt, master->yt, master->zt);
 	mat = matrix_multiply_matrix(rot, rot2);
 	mat = matrix_multiply_matrix(mat, scale);

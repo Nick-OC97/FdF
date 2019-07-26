@@ -1,21 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vec_ang.c                                          :+:      :+:    :+:   */
+/*   error_check.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: no-conne <no-conne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/10 11:56:21 by no-conne          #+#    #+#             */
-/*   Updated: 2019/07/26 09:21:22 by no-conne         ###   ########.fr       */
+/*   Created: 2019/07/26 11:14:31 by no-conne          #+#    #+#             */
+/*   Updated: 2019/07/26 11:21:11 by no-conne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/libvec.h"
+#include "./includes/main.h"
 
-float		vec_ang(t_point o, t_point a, t_point b)
+int		arr_size(char **lst)
 {
-	float i;
+	int i;
 
-	i = dot_prod(a, b) / (magnitude(o, a) * magnitude(o, b));
+	i = 0;
+	while (lst[i])
+	{
+		i++;
+	}
 	return (i);
+}
+
+void	checker(t_master *master, t_info info)
+{
+	int x;
+
+	x = 0;
+	x = arr_size(info.inf);
+	if (x != master->grid.num_x)
+	{
+		ft_putstr("Incomplete map");
+		exit(0);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: no-conne <no-conne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/22 13:50:09 by no-conne          #+#    #+#             */
-/*   Updated: 2019/07/26 08:54:15 by no-conne         ###   ########.fr       */
+/*   Updated: 2019/07/26 11:36:20 by no-conne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,12 @@ t_grid_sizes		get_sizes(char *path)
 	return (grid);
 }
 
+void				m_func(t_master *master)
+{
+	master->o_cords = (t_point *)malloc(sizeof(t_point) * master->grid.num_tot);
+	master->s_cords = (t_point *)malloc(sizeof(t_point) * master->grid.num_tot);
+}
+
 void				free_func(t_info info)
 {
 	free(info.inf);
@@ -60,13 +66,13 @@ void				interpreter(const char *path, t_master *master)
 
 	info.total_size = 0;
 	info.y_size = 0;
-	master->o_cords = (t_point *)malloc(sizeof(t_point) * master->grid.num_tot);
-	master->s_cords = (t_point *)malloc(sizeof(t_point) * master->grid.num_tot);
+	m_func(master);
 	info.fd = open(path, O_RDONLY);
 	while (get_next_line(info.fd, &info.line) > 0)
 	{
 		info.x_size = 0;
 		info.inf = ft_strsplit(info.line, ' ');
+		checker(master, info);
 		while (info.x_size < master->grid.num_x)
 		{
 			master->o_cords[info.total_size].x = info.x_size -
