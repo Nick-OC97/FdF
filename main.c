@@ -6,109 +6,14 @@
 /*   By: no-conne <no-conne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/04 09:07:25 by no-conne          #+#    #+#             */
-/*   Updated: 2019/07/24 16:43:48 by no-conne         ###   ########.fr       */
+/*   Updated: 2019/07/26 07:54:13 by no-conne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/main.h"
-#include <stdio.h>
 
-void	move_func_l(t_master *master)
+int		my_key_funct(int keycode, t_master *master)
 {
-	master->trans_x = master->trans_x - 10;
-	translator(master);
-	clear_image(&master->img, 0x000000);
-	draw_func(master);
-	put_img(master[0].acc, &master->img);
-}
-
-void	move_func_r(t_master *master)
-{
-	master->trans_x = master->trans_x + 10;
-	translator(master);
-	clear_image(&master->img, 0x000000);
-	draw_func(master);
-	put_img(master[0].acc, &master->img);
-}
-
-void	move_func_u(t_master *master)
-{
-	master->trans_y = master->trans_y + 10;
-	translator(master);
-	clear_image(&master->img, 0x000000);
-	draw_func(master);
-	put_img(master[0].acc, &master->img);
-}
-
-void	move_func_d(t_master *master)
-{
-	master->trans_y = master->trans_y - 10;
-	translator(master);
-	clear_image(&master->img, 0x000000);
-	draw_func(master);
-	put_img(master[0].acc, &master->img);
-}
-
-void	scale_func_s(t_master *master)
-{
-	master->xt *= 0.9;
-	master->yt *= 0.9;
-	translator(master);
-	clear_image(&master->img, 0x000000);
-	draw_func(master);
-	put_img(master[0].acc, &master->img);
-}
-
-void	scale_func_l(t_master *master)
-{
-	master->xt *= 1.1;
-	master->yt *= 1.1;
-	translator(master);
-	clear_image(&master->img, 0x000000);
-	draw_func(master);
-	put_img(master[0].acc, &master->img);
-}
-
-void	rot_func_xu(t_master *master)
-{
-	master->xa = master->xa + 0.1;
-	translator(master);
-	clear_image(&master->img, 0x000000);
-	draw_func(master);
-	put_img(master->acc, &master->img);
-}
-
-void	rot_func_xd(t_master *master)
-{
-	master->xa = master->xa - 0.1;
-	translator(master);
-	clear_image(&master->img, 0x000000);
-	draw_func(master);
-	put_img(master->acc, &master->img);
-}
-
-void	rot_func_yl(t_master *master)
-{
-	master->ya = master->ya + 0.1;
-	translator(master);
-	clear_image(&master->img, 0x000000);
-	draw_func(master);
-	put_img(master->acc, &master->img);
-}
-
-void	rot_func_yr(t_master *master)
-{
-	master->ya = master->ya - 0.1;
-	translator(master);
-	clear_image(&master->img, 0x000000);
-	draw_func(master);
-	put_img(master->acc, &master->img);
-}
-
-int	my_key_funct(int keycode, t_master *master)
-{
-	//ft_putstr("Key event: ");
-	//ft_putnbr(keycode);
 	if (keycode == 53)
 		exit(0);
 	if (keycode == 123)
@@ -128,9 +33,11 @@ int	my_key_funct(int keycode, t_master *master)
 	if (keycode == 13)
 		rot_func_xd(master);
 	if (keycode == 0)
-		rot_func_yr(master);
-	if (keycode == 1)
 		rot_func_yl(master);
+	if (keycode == 1)
+		rot_func_yr(master);
+	if (keycode == 18 || keycode == 19 || keycode == 20)
+		color_func(master, keycode);
 	return (1);
 }
 
@@ -145,14 +52,15 @@ void	init_master(t_master *master)
 	master->trans_x = (WIN_W / 2 - master->grid.num_x / 2);
 	master->trans_y = (WIN_H / 2 - master->grid.num_y / 2);
 	master->trans_z = 0;
+	master->colour = 0xFFFFFF;
 }
 
-int	main(int argc, char **argv)
+int		main(int argc, char **argv)
 {
 	void			*mlx_ptr;
 	void			*win_ptr;
 	t_master		master;
-	int x;
+	int				x;
 
 	x = 0;
 	if (argc != 2)
@@ -171,7 +79,7 @@ int	main(int argc, char **argv)
 	interpreter(argv[1], &master);
 	translator(&master);
 	put_img(master.acc, &master.img);
-	mlx_hook(win_ptr, 2, 0, my_key_funct,&master);
+	mlx_hook(win_ptr, 2, 0, my_key_funct, &master);
 	mlx_loop(mlx_ptr);
 	return (0);
 }

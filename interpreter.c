@@ -6,7 +6,7 @@
 /*   By: no-conne <no-conne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/22 13:50:09 by no-conne          #+#    #+#             */
-/*   Updated: 2019/07/24 16:32:16 by no-conne         ###   ########.fr       */
+/*   Updated: 2019/07/26 08:54:15 by no-conne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,11 @@ void				free_func(t_info info)
 void				interpreter(const char *path, t_master *master)
 {
 	t_info	info;
-	
+
 	info.total_size = 0;
 	info.y_size = 0;
-	master->original_coords = (t_point *)malloc(sizeof(t_point) * master->grid.num_tot);
-	master->screen_coords = (t_point *)malloc(sizeof(t_point) * master->grid.num_tot);
+	master->o_cords = (t_point *)malloc(sizeof(t_point) * master->grid.num_tot);
+	master->s_cords = (t_point *)malloc(sizeof(t_point) * master->grid.num_tot);
 	info.fd = open(path, O_RDONLY);
 	while (get_next_line(info.fd, &info.line) > 0)
 	{
@@ -69,9 +69,11 @@ void				interpreter(const char *path, t_master *master)
 		info.inf = ft_strsplit(info.line, ' ');
 		while (info.x_size < master->grid.num_x)
 		{
-			master->original_coords[info.total_size].x = info.x_size - (master->grid.num_x - 1) * 0.5;
-			master->original_coords[info.total_size].y = info.y_size - (master->grid.num_y - 1) * 0.5;
-			master->original_coords[info.total_size].z = ft_atoi(info.inf[info.x_size]);
+			master->o_cords[info.total_size].x = info.x_size -
+			(master->grid.num_x - 1) * 0.5;
+			master->o_cords[info.total_size].y = info.y_size -
+			(master->grid.num_y - 1) * 0.5;
+			master->o_cords[info.total_size].z = ft_atoi(info.inf[info.x_size]);
 			free(info.inf[info.x_size]);
 			info.x_size++;
 			info.total_size++;

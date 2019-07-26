@@ -6,7 +6,7 @@
 /*   By: no-conne <no-conne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/22 13:32:27 by no-conne          #+#    #+#             */
-/*   Updated: 2019/07/24 14:57:21 by no-conne         ###   ########.fr       */
+/*   Updated: 2019/07/26 08:56:13 by no-conne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ void	draw_line(t_point p1, t_point p2, t_master *master)
 	i = 1;
 	while (i < step)
 	{
-		put_pxlto_img(&master->img, 0xFFFFFF, p1.x, p1.y);
+		put_pxlto_img(&master->img, master->colour, p1.x, p1.y);
 		p1.x = p1.x + dx;
 		p1.y = p1.y + dy;
 		i++;
 	}
-	put_pxlto_img(&master->img, 0xFFFFFF, p1.x, p1.y);
+	put_pxlto_img(&master->img, master->colour, p1.x, p1.y);
 }
 
 void	draw_func(t_master *master)
@@ -49,7 +49,7 @@ void	draw_func(t_master *master)
 	while (x < (master->grid.num_tot))
 	{
 		if (j < master->grid.num_x)
-			draw_line(master->screen_coords[x], master->screen_coords[x + 1], master);
+			draw_line(master->s_cords[x], master->s_cords[x + 1], master);
 		else
 			j = 0;
 		x++;
@@ -59,7 +59,8 @@ void	draw_func(t_master *master)
 	while (x < (master->grid.num_tot))
 	{
 		if (x < master->grid.num_tot - master->grid.num_x)
-			draw_line(master->screen_coords[x], master->screen_coords[x + master->grid.num_x], master);
+			draw_line(master->s_cords[x], master->s_cords[x +
+			master->grid.num_x], master);
 		x++;
 	}
 }

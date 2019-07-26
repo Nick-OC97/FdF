@@ -6,33 +6,40 @@
 /*   By: no-conne <no-conne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/22 14:04:18 by no-conne          #+#    #+#             */
-/*   Updated: 2019/07/24 16:09:22 by no-conne         ###   ########.fr       */
+/*   Updated: 2019/07/26 08:55:32 by no-conne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/main.h"
 
+void	translator2(t_master *master, t_matrix mat)
+{
+	int x;
+
+	x = 0;
+	while (x < (master->grid.num_tot))
+	{
+		master->s_cords[x] = matrix_vecmultiply(master->o_cords[x], mat);
+		x++;
+	}
+	draw_func(master);
+}
+
 void	translator(t_master *master)
 {
-	int			x;
 	t_matrix	translate;
 	t_matrix	rot;
 	t_matrix	rot2;
 	t_matrix	scale;
 	t_matrix	mat;
 
-	x = 0;
-	translate = make_translate_matrix(master->trans_x, master->trans_y, master->trans_z);
+	translate = make_translate_matrix(master->trans_x, master->trans_y,
+	master->trans_z);
 	rot = make_rotate_Xmat(master->xa);
 	rot2 = make_rotate_Ymat(master->ya);
 	scale = make_scale_matrix(master->xt, master->yt, master->zt);
 	mat = matrix_multiply_matrix(rot, rot2);
 	mat = matrix_multiply_matrix(mat, scale);
 	mat = matrix_multiply_matrix(mat, translate);
-	while (x < (master->grid.num_tot))
-	{
-		master->screen_coords[x] = matrix_vecmultiply(master->original_coords[x], mat);
-		x++;
-	}
-	draw_func(master);
+	translator2(master, mat);
 }

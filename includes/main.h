@@ -6,7 +6,7 @@
 /*   By: no-conne <no-conne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/04 14:07:49 by no-conne          #+#    #+#             */
-/*   Updated: 2019/07/24 16:08:14 by no-conne         ###   ########.fr       */
+/*   Updated: 2019/07/26 08:15:31 by no-conne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,9 @@ typedef struct s_master
 	float			trans_x;
 	float			trans_y;
 	float			trans_z;
-	t_point			*screen_coords;
-	t_point			*original_coords;
+	int				colour;
+	t_point			*s_cords;
+	t_point			*o_cords;
 }				t_master;
 
 void				draw_func(t_master *master);
@@ -82,4 +83,16 @@ void				clear_image(t_image *img, int color);
 void				init_img(t_mlx_acc acc, t_image *img, int width, int height);
 void				put_pxlto_img(t_image *img, int color, int x, int y);
 void				put_img(t_mlx_acc acc, t_image *img);
+void				move_func_l(t_master *master);
+void				move_func_r(t_master *master);
+void				move_func_u(t_master *master);
+void				move_func_d(t_master *master);
+void				scale_func_s(t_master *master);
+void				scale_func_l(t_master *master);
+void				rot_func_xu(t_master *master);
+void				rot_func_xd(t_master *master);
+void				rot_func_yl(t_master *master);
+void				rot_func_yr(t_master *master);
+void				color_func(t_master *master, int keycode);
+
 #endif
