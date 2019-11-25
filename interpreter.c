@@ -6,7 +6,7 @@
 /*   By: no-conne <no-conne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/22 13:50:09 by no-conne          #+#    #+#             */
-/*   Updated: 2019/07/26 11:36:20 by no-conne         ###   ########.fr       */
+/*   Updated: 2019/11/25 08:13:17 by no-conne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void				interpreter(const char *path, t_master *master)
 	{
 		info.x_size = 0;
 		info.inf = ft_strsplit(info.line, ' ');
-		checker(master, info);
+		checker(master, info); //check errors
 		while (info.x_size < master->grid.num_x)
 		{
 			master->o_cords[info.total_size].x = info.x_size -
